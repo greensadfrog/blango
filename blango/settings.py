@@ -53,9 +53,11 @@ class Dev(Configuration):
       'blog',
       'crispy_forms',
       'crispy_bootstrap5',
+      'debug_toolbar',
   ]
 
   MIDDLEWARE = [
+      'debug_toolbar.middleware.DebugToolbarMiddleware',
       'django.middleware.security.SecurityMiddleware',
       'django.contrib.sessions.middleware.SessionMiddleware',
       'django.middleware.common.CommonMiddleware',
@@ -142,12 +144,19 @@ class Dev(Configuration):
 
   STATIC_URL = '/static/'
 
+  INTERNAL_IPS = [
+      "192.168.10.93",
+      "127.0.0.1",
+      ]
+
   # Default primary key field type
   # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
   DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
   CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
   CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+  
 
   LOGGING = {
     "version": 1,
@@ -171,6 +180,8 @@ class Dev(Configuration):
     },
   }
 
+  
+  
 
 class Prod(Dev):
     DEBUG = False
@@ -183,3 +194,8 @@ class Prod(Dev):
         default=f"sqlite:///{Dev.BASE_DIR}/alternative_db.sqlite3",
     ),
     }
+
+
+
+
+
